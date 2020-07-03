@@ -37,6 +37,9 @@ namespace ModBus
                 parametrs.DB = Convert.ToInt32(xnode.SelectSingleNode("db").InnerText);
                 parametrs.address = Convert.ToInt32(xnode.SelectSingleNode("address").InnerText);
                 parametrs.length = Convert.ToInt32(xnode.SelectSingleNode("length").InnerText);
+                parametrs.IP = xnode.SelectSingleNode("IP").InnerText;
+                parametrs.rack = Convert.ToInt32(xnode.SelectSingleNode("rack").InnerText);
+                parametrs.slot = Convert.ToInt32(xnode.SelectSingleNode("slot").InnerText);
 
                 //Thread caller = new Thread(
                 //    delegate ()
@@ -55,7 +58,7 @@ namespace ModBus
             DateTime time = DateTime.Now;
             WaterPLC_MongoNode waterPLC_MongoNode = new WaterPLC_MongoNode();
             S7Client s7Client = new S7Client();
-            s7Client.ConnectTo("192.168.219.190", 0, 2);
+            s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
             float value = 0;
             byte[] Buffer = new byte[parametrs.length];
 
@@ -66,8 +69,8 @@ namespace ModBus
             }
             else
             {
-                string error = "WaterPLC: ID = " + parametrs.id + " " + parametrs.name + time +
-                    "не удалось подключиться к адресу 192.168.219.190";
+                string error = "Water: ID = " + parametrs.id + " " + parametrs.name + time +
+                    "не удалось подключиться к адресу " + parametrs.IP;
 
                 Console.WriteLine(error);
                 Log.logWaterNode(error);
@@ -95,7 +98,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "WaterPLC: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name + time +
+                string error = "Water: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name + time +
                     "  Не удалось подключиться к базе данных " + e.Message;
 
                 Console.WriteLine(error);
@@ -111,7 +114,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "WaterPLC: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name +
+                string error = "Water: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name +
                     "Ошибка записи в MongoDB:" + time + "  " + e.Message;
 
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -121,7 +124,7 @@ namespace ModBus
                 Log.logWaterNode(error);
                 return;
             }
-            Console.WriteLine("WaterPLC: ID = " + waterPLC_MongoNode.ID + " " + waterPLC_MongoNode.name + " "
+            Console.WriteLine("Water: ID = " + waterPLC_MongoNode.ID + " " + waterPLC_MongoNode.name + " "
                 + waterPLC_MongoNode.value + " " + "Запить произведена: " + time);
             return;
         }

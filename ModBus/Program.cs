@@ -69,6 +69,9 @@ namespace ModBus
         public int DB { get; set; }
         public int address { get; set; }
         public int length { get; set; }
+        public string IP { get; set; }
+        public int rack { get; set; }
+        public int slot { get; set; }
     }
 
     internal class WaterPLC_MongoNode
