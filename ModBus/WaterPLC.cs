@@ -61,10 +61,12 @@ namespace ModBus
             float value = 0;
             byte[] Buffer = new byte[parametrs.length];
 
-            s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
+            
 
             for(int i=0; i <=2; i++)
             {
+                s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
+
                 if (s7Client.Connected)
                 {
                     s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
@@ -86,6 +88,7 @@ namespace ModBus
             
             //Console.WriteLine(parametrs.id + "   " + parametrs.name + "    " + value.ToString() + "  " + time);
             s7Client.Disconnect();
+            
             
             int month = DateTime.Now.Month;
             int year = DateTime.Now.Year;

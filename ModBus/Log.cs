@@ -10,6 +10,7 @@ namespace ModBus
        static StringBuilder node = new StringBuilder();
         static StringBuilder node1 = new StringBuilder();
         static StringBuilder nodeWater = new StringBuilder();
+        static StringBuilder nodeGas = new StringBuilder();
         public static StringBuilder logNode(string Node) //Собтраю логи со всез потоков
         {
             node.Append("\n" + Node);
@@ -85,6 +86,32 @@ namespace ModBus
             }
             File.AppendAllTextAsync(newLocation + @"\logWater.txt", nodeWater.ToString());
             nodeWater.Clear();
+            return;
+        }
+
+        public static StringBuilder logGasNode(string Node) //Собтраю логи со всез потоков
+        {
+
+            nodeGas.Append("\n" + Node);
+            return nodeGas;
+        }
+
+        public static void logGasWrite() // раз в минуту записываю все
+        {
+
+            string newLocation = @"C:\AIT";
+            bool exists = System.IO.Directory.Exists(newLocation);
+            bool Fexists = System.IO.File.Exists(@"\logGas.txt");
+            if (!exists)
+            {
+                System.IO.Directory.CreateDirectory(newLocation);
+                if (!Fexists)
+                {
+                    System.IO.File.Create(newLocation + @"\logGas.txt");
+                }
+            }
+            File.AppendAllTextAsync(newLocation + @"\logGas.txt", nodeGas.ToString());
+            nodeGas.Clear();
             return;
         }
 

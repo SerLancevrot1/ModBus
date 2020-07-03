@@ -72,7 +72,7 @@ namespace ModBus
             string ipAddress = post.IP;
             int tcpPort = 502;
             PAC3200_Power A1 = new PAC3200_Power();
-            tcpClient = new TcpClient();
+           
             // оствободить память -- то что new 
 
             //try
@@ -100,7 +100,8 @@ namespace ModBus
             //}
             for (int i = 0; i <= 2; i++)
             {
-                
+                tcpClient = new TcpClient();
+
                 try
                 {
                     tcpClient.Connect(ipAddress, tcpPort);
@@ -137,6 +138,12 @@ namespace ModBus
                     
                   
                 }
+                if (i == 2)
+                {
+                    return;
+                }
+                tcpClient.Close();
+                tcpClient.Dispose();
 
             }
 
