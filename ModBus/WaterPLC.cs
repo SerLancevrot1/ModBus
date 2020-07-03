@@ -58,24 +58,31 @@ namespace ModBus
             DateTime time = DateTime.Now;
             WaterPLC_MongoNode waterPLC_MongoNode = new WaterPLC_MongoNode();
             S7Client s7Client = new S7Client();
-            s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
             float value = 0;
             byte[] Buffer = new byte[parametrs.length];
 
-            if (s7Client.Connected)
-            {
-                s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
-                value = S7.GetRealAt(Buffer, 0);
-            }
-            else
-            {
-                string error = "Water: ID = " + parametrs.id + " " + parametrs.name + time +
-                    "не удалось подключиться к адресу " + parametrs.IP;
+            s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
 
-                Console.WriteLine(error);
-                Log.logWaterNode(error);
-                return;
+            for(int i=0; i <=2; i++)
+            {
+                if (s7Client.Connected)
+                {
+                    s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
+                    value = S7.GetRealAt(Buffer, 0);
+                    break;
+                }
+                else
+                {
+                    string error = "Water: ID = " + parametrs.id + " " + parametrs.name + " " + time + " " +
+                        "не удалось подключиться к адресу " + parametrs.IP;
+
+                    Console.WriteLine(error);
+                    Log.logWaterNode(error);
+                    return;
+                }
             }
+
+           
             
             //Console.WriteLine(parametrs.id + "   " + parametrs.name + "    " + value.ToString() + "  " + time);
             s7Client.Disconnect();
