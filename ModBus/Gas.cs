@@ -53,7 +53,7 @@ namespace ModBus
             }
         }
 
-        public  void SaveDocsGas(Gas_XmlDoc parametrs)
+         void SaveDocsGas(Gas_XmlDoc parametrs)
         {
             DateTime time = DateTime.Now;
             Gas_MongoNode gas_MongoNode = new Gas_MongoNode();

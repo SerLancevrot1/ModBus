@@ -6,7 +6,7 @@ namespace ModBus
 {
     internal  class DelayStart
     {
-        internal  void Start()
+        internal static void Start()
         {
             Console.WriteLine();
 

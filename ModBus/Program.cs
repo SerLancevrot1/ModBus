@@ -32,8 +32,8 @@ namespace ModBus
             Console.WriteLine("Continuing with the application");
 
 
-            DelayStart delayStart = new DelayStart();
-            Task.Factory.StartNew(() => delayStart.Start());
+            //DelayStart delayStart = new DelayStart();
+            Task.Factory.StartNew(() => DelayStart.Start());
 
             Console.Read();
         }
