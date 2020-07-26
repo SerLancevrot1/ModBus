@@ -82,4 +82,26 @@ namespace ModBus
         public float value { get; set; }
         public DateTime dateTime { get; set; }
     }
+
+    internal class Gas_XmlDoc
+    {
+        public int id { get; set; }
+        public string name { get; set; }
+        public string interview { get; set; }
+        public int DB { get; set; }
+        public int address { get; set; }
+        public int length { get; set; }
+        public string IP { get; set; }
+        public int rack { get; set; }
+        public int slot { get; set; }
+    }
+
+    internal class Gas_MongoNode
+    {
+        public ObjectId _id { get; set; }
+        public int ID { get; set; }
+        public string name { get; set; }
+        public float value { get; set; }
+        public DateTime dateTime { get; set; }
+    }
 }
