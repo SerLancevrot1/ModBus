@@ -7,7 +7,7 @@ using System.Xml;
 
 namespace ModBus
 {
-    class Gas
+   public class Gas
     {
          public void ReadXmlGas()
         {
@@ -29,7 +29,7 @@ namespace ModBus
 
             foreach (XmlNode xnode in nodeList)
             {
-                WaterPLC_XmlDoc parametrs = new WaterPLC_XmlDoc();
+                Gas_XmlDoc parametrs = new Gas_XmlDoc();
                 parametrs.id = Convert.ToInt32(xnode.SelectSingleNode("id").InnerText);
                 parametrs.name = xnode.SelectSingleNode("name").InnerText;
                 parametrs.interview = xnode.SelectSingleNode("interview").InnerText;

@@ -12,6 +12,7 @@ namespace ModBus
 
             Electricity electricity = new Electricity();
             WaterPLC waterPLC = new WaterPLC();
+            Gas gas = new Gas();
 
             //Time when method needs to be called
             var DailyTime = "00";
@@ -36,6 +37,7 @@ namespace ModBus
                    "---------------------------------");
                 Task.Delay(ts).ContinueWith((x) => electricity.ReadXmlElectricity());
                 Task.Delay(ts).ContinueWith((x) => waterPLC.ReadXmlWaterPLC());
+                Task.Delay(ts).ContinueWith((x) => gas.ReadXmlGas());
 
                 Thread.Sleep(60000);
                 Log.logWrite();
