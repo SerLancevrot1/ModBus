@@ -7,12 +7,12 @@ using System.Xml;
 
 namespace ModBus
 {
-    class WaterPLC
+    class Water
     {
-         public void ReadXmlWaterPLC()
+         public void ReadXmlWater()
         {
             PathXml pathXml = new PathXml();
-            string way = pathXml.WaterPLC_RelativePathToXml();
+            string way = pathXml.Water_RelativePathToXml();
             XmlDocument xDoc = new XmlDocument();
             try
             {
@@ -29,7 +29,7 @@ namespace ModBus
 
             foreach (XmlNode xnode in nodeList)
             {
-                WaterPLC_XmlDoc parametrs = new WaterPLC_XmlDoc();
+                Water_XmlDoc parametrs = new Water_XmlDoc();
                 parametrs.id = Convert.ToInt32(xnode.SelectSingleNode("id").InnerText);
                 parametrs.name = xnode.SelectSingleNode("name").InnerText;
                 parametrs.interview = xnode.SelectSingleNode("interview").InnerText;
@@ -49,14 +49,14 @@ namespace ModBus
                 //    );
                 //caller.Start();
 
-                Task.Factory.StartNew(() => SaveDocsWaterPLC(parametrs));
+                Task.Factory.StartNew(() => SaveDocsWater(parametrs));
             }
         }
 
-        public  void SaveDocsWaterPLC(WaterPLC_XmlDoc parametrs)
+        public  void SaveDocsWater(Water_XmlDoc parametrs)
         {
             DateTime time = DateTime.Now;
-            WaterPLC_MongoNode waterPLC_MongoNode = new WaterPLC_MongoNode();
+            Water_MongoNode water_MongoNode = new Water_MongoNode();
             S7Client s7Client = new S7Client();
             float value = 0;
             byte[] Buffer = new byte[parametrs.length];
@@ -94,21 +94,21 @@ namespace ModBus
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
 
-            waterPLC_MongoNode.ID = parametrs.id;
-            waterPLC_MongoNode.name = parametrs.name;
-            waterPLC_MongoNode.value = value;
-            waterPLC_MongoNode.dateTime = time;
+            water_MongoNode.ID = parametrs.id;
+            water_MongoNode.name = parametrs.name;
+            water_MongoNode.value = value;
+            water_MongoNode.dateTime = time;
 
-            IMongoCollection<WaterPLC_MongoNode> collection = null;
+            IMongoCollection<Water_MongoNode> collection = null;
             try
             {
                 MongoClient client = new MongoClient("mongodb://localhost");
                 IMongoDatabase DB = client.GetDatabase("Water");
-                collection = DB.GetCollection<WaterPLC_MongoNode>(date);
+                collection = DB.GetCollection<Water_MongoNode>(date);
             }
             catch (Exception e)
             {
-                string error = "Water: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name + time +
+                string error = "Water: ID = " + water_MongoNode.ID + " " + parametrs.name + time +
                     "  Не удалось подключиться к базе данных " + e.Message;
 
                 Console.WriteLine(error);
@@ -119,12 +119,12 @@ namespace ModBus
 
             try
             {
-                 collection.InsertOne(waterPLC_MongoNode);
+                 collection.InsertOne(water_MongoNode);
                 //collection.InsertOne(post);
             }
             catch (Exception e)
             {
-                string error = "Water: ID = " + waterPLC_MongoNode.ID + " " + parametrs.name +
+                string error = "Water: ID = " + water_MongoNode.ID + " " + parametrs.name +
                     "Ошибка записи в MongoDB:" + time + "  " + e.Message;
 
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -134,8 +134,8 @@ namespace ModBus
                 Log.logWaterNode(error);
                 return;
             }
-            Console.WriteLine("Water: ID = " + waterPLC_MongoNode.ID + " " + waterPLC_MongoNode.name + " "
-                + waterPLC_MongoNode.value + " " + "Запить произведена: " + time);
+            Console.WriteLine("Water: ID = " + water_MongoNode.ID + " " + water_MongoNode.name + " "
+                + water_MongoNode.value + " " + "Запить произведена: " + time);
             return;
         }
     }

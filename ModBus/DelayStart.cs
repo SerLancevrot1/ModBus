@@ -11,7 +11,7 @@ namespace ModBus
             Console.WriteLine();
 
             Electricity electricity = new Electricity();
-            WaterPLC waterPLC = new WaterPLC();
+            Water waterPLC = new Water();
             Gas gas = new Gas();
 
             //Time when method needs to be called
@@ -36,7 +36,7 @@ namespace ModBus
                 Console.WriteLine("---------------------------------" + dateNow.ToString() +
                    "---------------------------------");
                 Task.Delay(ts).ContinueWith((x) => electricity.ReadXmlElectricity());
-                Task.Delay(ts).ContinueWith((x) => waterPLC.ReadXmlWaterPLC());
+                Task.Delay(ts).ContinueWith((x) => waterPLC.ReadXmlWater());
                 Task.Delay(ts).ContinueWith((x) => gas.ReadXmlGas());
 
                 Thread.Sleep(60000);

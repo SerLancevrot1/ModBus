@@ -18,7 +18,7 @@ namespace ModBus
             return resPath;
         }
 
-        public  string WaterPLC_RelativePathToXml()
+        public  string Water_RelativePathToXml()
         {
             string exeDir = AppDomain.CurrentDomain.BaseDirectory;
 

@@ -61,7 +61,7 @@ namespace ModBus
         public float WQ { get; set; }
     }
 
-    internal class WaterPLC_XmlDoc
+    internal class Water_XmlDoc
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -74,7 +74,7 @@ namespace ModBus
         public int slot { get; set; }
     }
 
-    internal class WaterPLC_MongoNode
+    internal class Water_MongoNode
     {
         public ObjectId _id { get; set; }
         public int ID { get; set; }
