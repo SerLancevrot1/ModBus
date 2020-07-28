@@ -54,7 +54,7 @@ namespace ModBus
         }
 
          void SaveDocsGas(Gas_XmlDoc parametrs)
-        {
+         {
             DateTime time = DateTime.Now;
             Gas_MongoNode gas_MongoNode = new Gas_MongoNode();
             S7Client s7Client = new S7Client();
@@ -75,7 +75,7 @@ namespace ModBus
                 }
                 else
                 {
-                    string error = "Water: ID = " + parametrs.id + " " + parametrs.name + " " + time + " " +
+                    string error = "Gas: ID = " + parametrs.id + " " + parametrs.name + " " + time + " " +
                         "не удалось подключиться к адресу " + parametrs.IP;
 
                     Console.WriteLine(error);
@@ -124,7 +124,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "Water: ID = " + gas_MongoNode.ID + " " + parametrs.name +
+                string error = "Gas: ID = " + gas_MongoNode.ID + " " + parametrs.name +
                     "Ошибка записи в MongoDB:" + time + "  " + e.Message;
 
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -134,9 +134,9 @@ namespace ModBus
                 Log.logWaterNode(error);
                 return;
             }
-            Console.WriteLine("Water: ID = " + gas_MongoNode.ID + " " + gas_MongoNode.name + " "
+            Console.WriteLine("Gas: ID = " + gas_MongoNode.ID + " " + gas_MongoNode.name + " "
                 + gas_MongoNode.value + " " + "Запить произведена: " + time);
             return;
-        }
+         }
     }
 }
