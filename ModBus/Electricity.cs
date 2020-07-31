@@ -1,4 +1,5 @@
 ﻿using Modbus.Device;
+using ModBus.Classes;
 using MongoDB.Driver;
 using System;
 using System.IO;

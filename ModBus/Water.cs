@@ -1,4 +1,5 @@
-﻿using MongoDB.Driver;
+﻿using ModBus.Classes;
+using MongoDB.Driver;
 using Sharp7;
 using System;
 using System.Threading;
