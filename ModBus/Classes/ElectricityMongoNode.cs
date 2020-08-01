@@ -15,4 +15,5 @@ namespace ModBus.Classes
         public float WQ_in { get; set; }
         public float WQ_oup { get; set; }
         public float WQ { get; set; }
+    }
 }

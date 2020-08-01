@@ -109,7 +109,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "Water: ID = " + water_MongoNode.ID + " " + parametrs.name + time +
+                string error = "Water: ID = " + parametrs.id + " " + parametrs.name + time +
                     "  Не удалось подключиться к базе данных " + e.Message;
 
                 Console.WriteLine(error);
@@ -125,7 +125,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "Water: ID = " + water_MongoNode.ID + " " + parametrs.name +
+                string error = "Water: ID = " + parametrs.id + " " + parametrs.name +
                     "Ошибка записи в MongoDB:" + time + "  " + e.Message;
 
                 Console.ForegroundColor = ConsoleColor.Red;
@@ -135,7 +135,7 @@ namespace ModBus
                 Log.logWaterNode(error);
                 return;
             }
-            Console.WriteLine("Water: ID = " + water_MongoNode.ID + " " + water_MongoNode.name + " "
+            Console.WriteLine("Water: ID = " + parametrs.id + " " + water_MongoNode.name + " "
                 + water_MongoNode.value + " " + "Запить произведена: " + time);
             return;
         }
