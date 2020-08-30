@@ -8,8 +8,10 @@ namespace ModBus
     {
         internal static void Start()
         {
+            //Запуск потоков читающих счетчики каждую минуту в одно и то же время
             Console.WriteLine();
 
+            //!
             Electricity electricity = new Electricity();
             Water waterPLC = new Water();
             Gas gas = new Gas();
@@ -40,8 +42,8 @@ namespace ModBus
                 Task.Delay(ts).ContinueWith((x) => gas.ReadXmlGas());
 
                 Thread.Sleep(60000);
-                Log.logWrite();
-                Log.logWrite1();
+                Log.logWriteElictricity();
+                Log.logWriteElictricityTestID();
                 Log.logWaterWrite();
             }
         }

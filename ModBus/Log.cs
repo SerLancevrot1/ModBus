@@ -7,17 +7,18 @@ namespace ModBus
 {
    static class Log
     {
-       static StringBuilder node = new StringBuilder();
-        static StringBuilder node1 = new StringBuilder();
+       static StringBuilder nodeElictricity = new StringBuilder();
+        static StringBuilder nodeElictricityTestID = new StringBuilder();
         static StringBuilder nodeWater = new StringBuilder();
         static StringBuilder nodeGas = new StringBuilder();
-        public static StringBuilder logNode(string Node) //Собтраю логи со всез потоков
+
+        public static StringBuilder logNodeElictricity(string Node) //Собтраю логи со всех потоков
         {
-            node.Append("\n" + Node);
-            return node;
+            nodeElictricity.Append("\n" + Node);
+            return nodeElictricity;
         }
 
-      public  static void logWrite() // раз в минуту записываю все
+      public  static void logWriteElictricity() // раз в минуту записываю все вместе с запуском потов
         {
            
             string newLocation = @"C:\AIT";       
@@ -31,19 +32,19 @@ namespace ModBus
                     System.IO.File.Create(newLocation + @"\log.txt");
                 }
             }
-            File.AppendAllTextAsync(newLocation + @"\log.txt", node.ToString());
-            node.Clear();
+            File.AppendAllTextAsync(newLocation + @"\log.txt", nodeElictricity.ToString());
+            nodeElictricity.Clear();
             return;
         }
 
-        public static StringBuilder logNode1(string Node) //Собтраю логи со всез потоков
+        public static StringBuilder logNodeElictricityTestID(string Node) //Собтраю логи со всез потоков
         {
 
-            node1.Append("\n" + Node);
-            return node1;
+            nodeElictricityTestID.Append("\n" + Node);
+            return nodeElictricityTestID;
         }
 
-        public static void logWrite1() // раз в минуту записываю все
+        public static void logWriteElictricityTestID() // раз в минуту записываю все
         {
 
             string newLocation = @"C:\AIT";
@@ -57,8 +58,8 @@ namespace ModBus
                     System.IO.File.Create(newLocation + @"\log1.txt");
                 }
             }
-            File.AppendAllTextAsync(newLocation + @"\log1.txt", node1.ToString());
-            node1.Clear();
+            File.AppendAllTextAsync(newLocation + @"\log1.txt", nodeElictricityTestID.ToString());
+            nodeElictricityTestID.Clear();
             return;
         }
 

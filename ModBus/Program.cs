@@ -18,18 +18,20 @@ namespace ModBus
         {
             Console.SetWindowSize(200 , Console.WindowHeight);
 
-            const string appName = "ModBus";
-            bool createdNew;
+            const string applicationName = "ModBus";
+            bool createdApplicationNew;
 
-            mutex = new Mutex(true, appName, out createdNew); // Одна версия приложения
+            
+            mutex = new Mutex(true, applicationName, out createdApplicationNew); 
 
-            if (!createdNew)
+            // Проверка на единстенную версию приложения
+            if (!createdApplicationNew)
             {
-                Console.WriteLine(appName + " Приложение уже запущено! Exiting t.");
+                Console.WriteLine(applicationName + " Приложение уже запущено! Выход.");
                 //Console.ReadKey();
                 return;
             }
-            Console.WriteLine("Continuing with the application");
+            Console.WriteLine("Программа выполняется");
 
 
             //DelayStart delayStart = new DelayStart();

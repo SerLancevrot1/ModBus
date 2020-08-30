@@ -13,7 +13,7 @@ namespace ModBus
          public void ReadXmlGas()
         {
             PathXml pathXml = new PathXml();
-            string way = pathXml.Gas_RelativePathToXml();
+            string way = pathXml.GasRelativePathToXml();
             XmlDocument xDoc = new XmlDocument();
             try
             {

@@ -13,7 +13,7 @@ namespace ModBus
          public void ReadXmlWater()
         {
             PathXml pathXml = new PathXml();
-            string way = pathXml.Water_RelativePathToXml();
+            string way = pathXml.WaterRelativePathToXml();
             XmlDocument xDoc = new XmlDocument();
             try
             {

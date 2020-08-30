@@ -15,11 +15,6 @@ namespace ModBus
     {
          public void ReadXmlElectricity()
         {
-            //дата+ запустился писать в ЛОГ
-
-
-            //Console.Clear();
-
 
             PathXml pathXml = new PathXml();
             string way = pathXml.ElectricityRelativePathToXml();
@@ -74,7 +69,7 @@ namespace ModBus
             int tcpPort = 502;
             PAC3200_Power A1 = new PAC3200_Power();
            
-            // оствободить память -- то что new 
+
 
             //try
             //{
@@ -127,13 +122,13 @@ namespace ModBus
                     Console.WriteLine(error);
                     if(post.id != 999)
                     {
-                        Log.logNode1(error);
-                        Log.logNode(error);
+                        Log.logNodeElictricityTestID(error);
+                        Log.logNodeElictricity(error);
                        
                     }
                     else
                     {
-                        Log.logNode(error);
+                        Log.logNodeElictricity(error);
                         return;
                     }
                     
@@ -180,7 +175,7 @@ namespace ModBus
                 string error = "Electricity: ID = " + post.id + " " + post.IP +
                     "Не удалось подключиться к базе данных " + e.Message;
                 Console.WriteLine(error);
-                Log.logNode(error);
+                Log.logNodeElictricity(error);
                 return;
             }
             
@@ -196,7 +191,7 @@ namespace ModBus
                 Console.ForegroundColor = ConsoleColor.Red;
                 Console.WriteLine(error);
                 Console.ForegroundColor = ConsoleColor.White;
-                Log.logNode(error);
+                Log.logNodeElictricity(error);
                 return;
             }
             Console.WriteLine("Electricity: ID = " + post.id + " " + post.IP + " " + mongoNode.wP_in + 
