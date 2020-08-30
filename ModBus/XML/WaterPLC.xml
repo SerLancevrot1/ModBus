@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<counters>
+
+  
+  <counter>
+    <id>1</id>
+    <name>FM01_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>4</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>2</id>
+    <name>FM02_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>16</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>3</id>
+    <name>FM03_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>28</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>4</id>
+    <name>FM04_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>40</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>5</id>
+    <name>FM05_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>52</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>6</id>
+    <name>FM06_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>64</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>7</id>
+    <name>FM07_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>76</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>8</id>
+    <name>FM08_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>88</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>9</id>
+    <name>FM09_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>100</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>10</id>
+    <name>FM10_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>112</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>11</id>
+    <name>FM11_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>124</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>12</id>
+    <name>FM12_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>136</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>13</id>
+    <name>FM115_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>15258</address>
+    <length>4</length>
+    <IP>192.168.0.30</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>14</id>
+    <name>FM460A_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>16142</address>
+    <length>4</length>
+    <IP>192.168.0.30</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>15</id>
+    <name>FM460B_SUM</name>
+    <interview>+</interview>
+    <db>1</db>
+    <address>16174</address>
+    <length>4</length>
+    <IP>192.168.0.30</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>16</id>
+    <name>FM203_SUM</name>
+    <interview>+</interview>
+    <db>101</db>
+    <address>12</address>
+    <length>4</length>
+    <IP>29.67.7.158</IP>
+    <rack>0</rack>
+    <slot>3</slot>
+  </counter>
+
+  <counter>
+    <id>17</id>
+    <name>FM210_SUM</name>
+    <interview>+</interview>
+    <db>101</db>
+    <address>164</address>
+    <length>4</length>
+    <IP>29.67.7.158</IP>
+    <rack>0</rack>
+    <slot>3</slot>
+  </counter>
+
+  <counter>
+    <id>18</id>
+    <name>FM211_SUM</name>
+    <interview>+</interview>
+    <db>101</db>
+    <address>168</address>
+    <length>4</length>
+    <IP>29.67.7.158</IP>
+    <rack>0</rack>
+    <slot>3</slot>
+  </counter>
+</counters>

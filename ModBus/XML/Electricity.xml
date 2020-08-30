@@ -1,0 +1,581 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<counters>
+	<counter>
+	<id>1</id>
+	<IP>192.168.219.1</IP>
+	<name>A1</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Трансформаторная</comment>
+	</counter>
+
+	<counter>
+	<id>2</id>
+	<IP>192.168.219.2</IP>
+	<name>A2</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Трансформаторная</comment>
+	</counter>
+	
+	<counter>
+	<id>3</id>
+	<IP>192.168.219.3</IP>
+	<name>A3</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Трансформаторная</comment>
+	</counter>
+		
+	<counter>	
+	<id>4</id>
+	<IP>192.168.219.4</IP>
+	<name>GR_1Q11</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Компрессор высокого давления 1</comment>
+	</counter>
+		
+	<counter>	
+	<id>5</id>
+	<IP>192.168.219.5</IP>
+	<name>GR_1Q12</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Линия заварного чая</comment>
+		</counter>
+	
+	
+<counter>
+	<id>6</id>
+	<IP>192.168.219.6</IP>
+	<name>GR_1Q21</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Компрессор высокого давления 2</comment>
+</counter>
+	
+	<counter>
+	<id>7</id>
+	<IP>192.168.219.7</IP>
+	<name>GR_1Q22</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Помещение для сиропа и водоподготовка сиропной комнаты</comment>
+</counter>
+	
+	<counter>
+	<id>8</id>
+	<IP>192.168.219.8</IP>
+	<name>GR_2Q11</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Компрессор высокого давления 3</comment>
+</counter>
+	
+	<counter>
+	<id>9</id>
+	<IP>192.168.219.9</IP>
+	<name>GR_2Q12</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Линия 1</comment>
+</counter>
+		
+		<counter>
+	<id>10</id>
+	<IP>192.168.219.10</IP>
+	<name>GR_2Q21</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Бойлер</comment>
+	</counter>		
+			
+<counter>
+	<id>11</id>
+	<IP>192.168.219.11</IP>
+	<name>GR_2Q22</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Холодильник 2</comment>
+	</counter>
+	
+<counter>
+	<id>12</id>
+	<IP>192.168.219.12</IP>
+	<name>GR_2Q23</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Холодильник 1</comment>
+	</counter>
+	
+<counter>
+	<id>13</id>
+	<IP>192.168.219.13</IP>
+	<name>GR_2Q24</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Линия 3</comment>
+	</counter>
+	
+<counter>
+	<id>14</id>
+	<IP>192.168.219.14</IP>
+	<name>GR_3Q11</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Линия 2</comment>
+	</counter>
+	
+<counter>
+	<id>15</id>
+	<IP>192.168.219.15</IP>
+	<name>GR_3Q12</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Насосная станция 1. Градирни</comment>
+	</counter>
+
+	<counter>
+	<id>16</id>
+	<IP>192.168.219.16</IP>
+	<name>GR_3Q21</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Компрессор высокого давления 4</comment>
+		</counter>
+	
+	
+<counter>
+	<id>17</id>
+	<IP>192.168.219.17</IP>
+	<name>GR_3Q22</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Компрессор низкого давления</comment>
+	</counter>
+
+	<counter>
+	<id>18</id>
+	<IP>192.168.219.18</IP>
+	<name>GR_3Q23</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Линия заварного чая</comment>
+</counter>
+	
+	<counter>
+	<id>19</id>
+	<IP>192.168.219.100</IP>
+	<name>S_5Q11</name>
+	<interview>+</interview>
+	<zone>Квас</zone>
+	<comment>Квасное производство</comment>
+	</counter>
+
+	<counter>
+	<id>20</id>
+	<IP>192.168.219.101</IP>
+	<name>GR_1Q1</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>ВВод 1</comment>
+	</counter>
+
+	<counter>
+	<id>21</id>
+	<IP>192.168.219.102</IP>
+	<name>GR_3Q2</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+	
+<counter>
+	<id>22</id>
+	<IP>192.168.219.103</IP>
+	<name>GR_2Q2</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>23</id>
+	<IP>192.168.219.104</IP>
+	<name>GR_2Q1</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q3</zone>
+	<comment>Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>24</id>
+	<IP>192.168.219.105</IP>
+	<name>GR_3Q1</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q2</zone>
+	<comment>Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>25</id>
+	<IP>192.168.219.106</IP>
+	<name>GT_1Q2</name>
+	<interview>+</interview>
+	<zone>ГРЩ-Q1</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>26</id>
+	<IP>192.168.219.110</IP>
+	<name>S_QF</name>
+	<interview>+</interview>
+	<zone>НПС</zone>
+	<comment>Насосная пожарная станция</comment>
+	</counter>
+
+	<counter>
+	<id>27</id>
+	<IP>192.168.219.111</IP>
+	<name>S_1QF1</name>
+	<interview>+</interview>
+	<zone>Купажное отделение</zone>
+	<comment>Щит Van Der Mollen</comment>
+	</counter>
+	
+<counter>
+	<id>28</id>
+	<IP>192.168.219.112</IP>
+	<name>S_1QF2</name>
+	<interview>+</interview>
+	<zone>Купажное отделение</zone>
+	<comment>Щит Chriwa</comment>
+	</counter>
+	
+<counter>
+	<id>29</id>
+	<IP>192.168.219.201</IP>
+	<name>S_G1</name>
+	<interview>+</interview>
+	<zone>ГРЩ-5000</zone>
+	<comment>Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>30</id>
+	<IP>192.168.219.202</IP>
+	<name>S_G2</name>
+	<interview>+</interview>
+	<zone>ГРЩ-5000</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>31</id>
+	<IP>192.168.219.220</IP>
+	<name>LOS_2QF2</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ВРЩ КНС Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>32</id>
+	<IP>192.168.219.221</IP>
+	<name>LOS_2QF3</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ5 воздуходувка биореактора</comment>
+	</counter>
+
+	<counter>
+	<id>33</id>
+	<IP>192.168.219.222</IP>
+	<name>LOS_2QF4</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ6 воздуходувка биореактора</comment>
+	</counter>
+
+	<counter>
+	<id>34</id>
+	<IP>192.168.219.223</IP>
+	<name>LOS_2QF5</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШР1 Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>35</id>
+	<IP>192.168.219.224</IP>
+	<name>LOS_2QF6</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ2</comment>
+	</counter>
+
+	<counter>
+	<id>36</id>
+	<IP>192.168.219.225</IP>
+	<name>LOS_2QF7</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ14 воздуходувка мембран</comment>
+	</counter>
+
+	<counter>
+	<id>37</id>
+	<IP>192.168.219.226</IP>
+	<name>LOS_2QF8</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>Резерв</comment>
+	</counter>
+
+	<counter>
+	<id>38</id>
+	<IP>192.168.219.227</IP>
+	<name>LOS_2QF9</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШС2</comment>
+	</counter>
+
+	<counter>
+	<id>39</id>
+	<IP>192.168.219.228</IP>
+	<name>LOS_1QF2</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ВРЩ КНС Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>40</id>
+	<IP>192.168.219.229</IP>
+	<name>LOS_1QF3</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>Шкаф управления ШУ4</comment>
+	</counter>
+
+	<counter>
+	<id>41</id>
+	<IP>192.168.219.230</IP>
+	<name>LOS_1QF4</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>Шкаф управления ШУ7</comment>
+	</counter>
+
+	<counter>
+	<id>42</id>
+	<IP>192.168.219.231</IP>
+	<name>LOS_1QF5</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШР1 Ввод 1</comment>
+	</counter>
+	
+<counter>
+	<id>43</id>
+	<IP>192.168.219.232</IP>
+	<name>LOS_1QF6</name>
+	<interview>+</interview>
+	<zone>ДОС</zone>
+	<comment>ШУ13 воздуходувка мембран</comment>
+	</counter>
+
+	<counter>
+	<id>44</id>
+	<IP>192.168.219.233</IP>
+	<name>LOS_1QF7</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ9 центрифуги</comment>
+	</counter>
+
+	<counter>
+	<id>45</id>
+	<IP>192.168.219.234</IP>
+	<name>LOS_1QF8</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ШУ13</comment>
+	</counter>
+
+	<counter>
+	<id>46</id>
+	<IP>192.168.219.20</IP>
+	<name>LOS_1QF</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ЛОС Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>47</id>
+	<IP>192.168.219.236</IP>
+	<name>LOS_2QF</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ЛОС Ввод 2</comment>
+	</counter>
+	
+	<counter>
+	<id>48</id>
+	<IP>192.168.219.33</IP>
+	<name>S_1QF</name>
+	<interview>+</interview>
+	<zone>КНС</zone>
+	<comment>Питание КНС</comment>
+	</counter>
+
+	<counter>
+	<id>49</id>
+	<IP>192.168.219.40</IP>
+	<name>KVAS_QF</name>
+	<interview>+</interview>
+	<zone>КВАС</zone>
+	<comment>Щит =KV+MCC1.1</comment>
+	</counter>
+
+	<counter>
+	<id>50</id>
+	<IP>192.168.219.41</IP>
+	<name>KVAS_QF1</name>
+	<interview>+</interview>
+	<zone>КВАС</zone>
+	<comment>ВРУ Секция 1</comment>
+	</counter>
+
+	<counter>
+	<id>51</id>
+	<IP>192.168.219.42</IP>
+	<name>KVAS_QF2</name>
+	<interview>+</interview>
+	<zone>КВАС</zone>
+	<comment>ВРУ Секция 2</comment>
+	</counter>
+
+	<counter>
+	<id>52</id>
+	<IP>192.168.219.43</IP>
+	<name>KVAS_QF3</name>
+	<interview>+</interview>
+	<zone>КВАС</zone>
+	<comment>ВРУ Секция 3</comment>
+	</counter>
+
+	<counter>
+	<id>53</id>
+	<IP>192.168.219.44</IP>
+	<name>KVAS_QFSK</name>
+	<interview>+</interview>
+	<zone>КВАС</zone>
+	<comment>Щит СК1 на квасном производстве</comment>
+	</counter>
+
+	<counter>
+	<id>54</id>
+	<IP>192.168.219.45</IP>
+	<name>S_ST_QF1</name>
+	<interview>+</interview>
+	<zone>АБК</zone>
+	<comment>Столовая Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>55</id>
+	<IP>192.168.219.46</IP>
+	<name>S_ST_QF2</name>
+	<interview>+</interview>
+	<zone>АБК</zone>
+	<comment>Столовая Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>56</id>
+	<IP>192.168.219.47</IP>
+	<name>S_ABK_QF1</name>
+	<interview>+</interview>
+	<zone>АБК</zone>
+	<comment>Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>57</id>
+	<IP>192.168.219.48</IP>
+	<name>S_ABK_QF3</name>
+	<interview>-</interview>
+	<zone>АБК</zone>
+	<comment>ABP</comment>
+	</counter>
+
+	<counter>
+	<id>58</id>
+	<IP>192.168.219.49</IP>
+	<name>S_ABK_QF2</name>
+	<interview>+</interview>
+	<zone>АБК</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+
+	<counter>
+	<id>59</id>
+	<IP>192.168.219.50</IP>
+	<name>S_SGP_QF1</name>
+	<interview>+</interview>
+	<zone>СГП</zone>
+	<comment>Ввод 1</comment>
+	</counter>
+
+	<counter>
+	<id>60</id>
+	<IP>192.168.219.51</IP>
+	<name>S_SGP_QF2</name>
+	<interview>+</interview>
+	<zone>СГП</zone>
+	<comment>Ввод 2</comment>
+	</counter>
+	
+<counter>
+	<id>61</id>
+	<IP>192.168.219.52</IP>
+	<name>S_WP_QF</name>
+	<interview>+</interview>
+	<zone>Водоподготовка</zone>
+	<comment>Щит водоподготовки</comment>
+	</counter>
+
+	<counter>
+	<id>62</id>
+	<IP>192.168.219.251</IP>
+	<name>LOS_1QF_2</name>
+	<interview>-</interview>
+	<zone>ЛОС</zone>
+	<comment>ЛОС Ввод 1 дублирующий</comment>
+	</counter>
+
+	<counter>
+	<id>63</id>
+	<IP>192.168.219.252</IP>
+	<name>LOS_2QF_2</name>
+	<interview>+</interview>
+	<zone>ЛОС</zone>
+	<comment>ЛОС Ввод 2 дублирующий</comment>
+</counter>
+
+	<counter>
+		<id>999</id>
+		<IP>92.68.219.251</IP>
+		<name>Debug</name>
+		<interview>+</interview>
+		<zone>Debug</zone>
+		<comment>Debug</comment>
+	</counter>
+	
+</counters>

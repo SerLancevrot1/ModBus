@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<counters>
+
+  <counter>
+    <id>1</id>
+    <name>GFM1_SUM</name>
+    <interview>+</interview>
+    <db>2</db>
+    <address>4</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>2</id>
+    <name>GFM2_SUM</name>
+    <interview>+</interview>
+    <db>2</db>
+    <address>16</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>3</id>
+    <name>GFM3_SUM</name>
+    <interview>+</interview>
+    <db>2</db>
+    <address>28</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+  <counter>
+    <id>4</id>
+    <name>GFM4_SUM</name>
+    <interview>+</interview>
+    <db>2</db>
+    <address>40</address>
+    <length>4</length>
+    <IP>192.168.219.190</IP>
+    <rack>0</rack>
+    <slot>2</slot>
+  </counter>
+
+
+</counters>
