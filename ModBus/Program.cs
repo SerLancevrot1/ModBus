@@ -18,13 +18,10 @@ namespace ModBus
         {
             Console.SetWindowSize(200 , Console.WindowHeight);
 
+            // Проверка на единстенную версию приложения
             const string applicationName = "ModBus";
             bool createdApplicationNew;
-
-            
             mutex = new Mutex(true, applicationName, out createdApplicationNew); 
-
-            // Проверка на единстенную версию приложения
             if (!createdApplicationNew)
             {
                 Console.WriteLine(applicationName + " Приложение уже запущено! Выход.");
@@ -33,8 +30,6 @@ namespace ModBus
             }
             Console.WriteLine("Программа выполняется");
 
-
-            //DelayStart delayStart = new DelayStart();
             Task.Factory.StartNew(() => DelayStart.Start());
 
             Console.Read();

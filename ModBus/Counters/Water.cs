@@ -42,14 +42,6 @@ namespace ModBus
                 parametrs.rack = Convert.ToInt32(xnode.SelectSingleNode("rack").InnerText);
                 parametrs.slot = Convert.ToInt32(xnode.SelectSingleNode("slot").InnerText);
 
-                //Thread caller = new Thread(
-                //    delegate ()
-                //    {
-                //        SaveDocsWaterPLC(parametrs);
-                //    }
-                //    );
-                //caller.Start();
-
                 Task.Factory.StartNew(() => SaveDocsWater(parametrs));
             }
         }

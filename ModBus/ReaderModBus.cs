@@ -2,7 +2,7 @@
 
 namespace ModBus
 {
-    //Класс для чтения значений счетчиков и конвертирования в float
+    //Класс для чтения значений счетчиков и конвертирования в float, без нужды не трогать 
     internal class PAC3200_Power
     {
         public ushort[] Registers = new ushort[20];

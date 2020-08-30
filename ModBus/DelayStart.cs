@@ -11,12 +11,12 @@ namespace ModBus
             //Запуск потоков читающих счетчики каждую минуту в одно и то же время
             Console.WriteLine();
 
-            //!
+           
             Electricity electricity = new Electricity();
             Water waterPLC = new Water();
             Gas gas = new Gas();
 
-            //Time when method needs to be called
+            //секунды
             var DailyTime = "00";
 
             while (true)
@@ -33,7 +33,7 @@ namespace ModBus
                     ts = date - dateNow;
                 }
 
-                //waits certan time and run the code
+                //линия для разграничения минут
 
                 Console.WriteLine("---------------------------------" + dateNow.ToString() +
                    "---------------------------------");
@@ -41,7 +41,7 @@ namespace ModBus
                 Task.Delay(ts).ContinueWith((x) => waterPLC.ReadXmlWater());
                 Task.Delay(ts).ContinueWith((x) => gas.ReadXmlGas());
 
-                Thread.Sleep(60000);
+                Thread.Sleep(60000); // 
                 Log.logWriteElictricity();
                 Log.logWriteElictricityTestID();
                 Log.logWaterWrite();

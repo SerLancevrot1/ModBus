@@ -7,13 +7,14 @@ namespace ModBus
 {
    static class Log
     {
-       static StringBuilder nodeElictricity = new StringBuilder();
+        static StringBuilder nodeElictricity = new StringBuilder();
         static StringBuilder nodeElictricityTestID = new StringBuilder();
         static StringBuilder nodeWater = new StringBuilder();
         static StringBuilder nodeGas = new StringBuilder();
 
         public static StringBuilder logNodeElictricity(string Node) //Собтраю логи со всех потоков
         {
+            //все ошибки за минуту складируются здесь, при вызове logWriteElictricity() данные берутся отсюда 
             nodeElictricity.Append("\n" + Node);
             return nodeElictricity;
         }
@@ -21,8 +22,8 @@ namespace ModBus
       public  static void logWriteElictricity() // раз в минуту записываю все вместе с запуском потов
         {
            
-            string newLocation = @"C:\AIT";       
-            bool exists = System.IO.Directory.Exists(newLocation);
+            string newLocation = @"C:\AIT";// путь для записи   
+            bool exists = System.IO.Directory.Exists(newLocation); // проверка на существования 
             bool Fexists = System.IO.File.Exists(@"\log.txt");
             if (!exists)
             {
@@ -32,8 +33,8 @@ namespace ModBus
                     System.IO.File.Create(newLocation + @"\log.txt");
                 }
             }
-            File.AppendAllTextAsync(newLocation + @"\log.txt", nodeElictricity.ToString());
-            nodeElictricity.Clear();
+            File.AppendAllTextAsync(newLocation + @"\log.txt", nodeElictricity.ToString()); // запись
+            nodeElictricity.Clear(); // очистка
             return;
         }
 

@@ -15,41 +15,36 @@ namespace ModBus
     {
          public void ReadXmlElectricity()
         {
-
+            // во всех классах счетчиков примерно одно и то же
+            // Подгрузка пути
             PathXml pathXml = new PathXml();
             string way = pathXml.ElectricityRelativePathToXml();
             XmlDocument xDoc = new XmlDocument();
             try
             {
-                xDoc.Load(way);
+                xDoc.Load(way); // проверка существования документа XML
             }
             catch (Exception e)
             {
                 Console.WriteLine("Неверный путь к XML файлу:" + e.Message);
                 Console.ReadLine();
             }
+
+            //Чтение XML
             XmlElement xRoot = xDoc.DocumentElement;
             XmlNodeList nodeList = xDoc.DocumentElement.SelectNodes("/counters/counter");
 
             foreach (XmlNode xnode in nodeList)
             {
+                // запись настроек счетчика в экземляр класса parametrs
                 ElectricityXmlDoc parametrs = new ElectricityXmlDoc();
                 parametrs.id = Convert.ToInt32(xnode.SelectSingleNode("id").InnerText);
                 parametrs.IP = xnode.SelectSingleNode("IP").InnerText;
                 parametrs.name = xnode.SelectSingleNode("name").InnerText;
                 parametrs.interview = xnode.SelectSingleNode("interview").InnerText;
-                if (parametrs.interview == "-") { continue; }
+                if (parametrs.interview == "-") { continue; } // если - пропуск итерации
                 parametrs.zone = xnode.SelectSingleNode("zone").InnerText;
                 parametrs.comment = xnode.SelectSingleNode("comment").InnerText;
-
-                //Thread caller = new Thread(
-                //    delegate ()
-                //    {
-                //        SaveDocsElectricity(parametrs);
-                //    }
-                //    );
-                //caller.Start();
-
 
                 Task.Factory.StartNew(() => SaveDocsElectricity(parametrs));
                 
@@ -59,7 +54,6 @@ namespace ModBus
 
         public  void SaveDocsElectricity(ElectricityXmlDoc post)
         {
-            //дата+ запустился
             
             ElectricityMongoNode mongoNode = new ElectricityMongoNode();
             ModbusIpMaster master = null;
@@ -69,33 +63,12 @@ namespace ModBus
             int tcpPort = 502;
             PAC3200_Power A1 = new PAC3200_Power();
            
+            // попытка подключения
 
-
-            //try
-            //{
-            //    IAsyncResult asyncResult = tcpClient.BeginConnect(ipAddress, tcpPort, null, null);
-            //    asyncResult.AsyncWaitHandle.WaitOne(1000, true); //wait for 3 sec
-
-            //    if (!asyncResult.IsCompleted)
-            //    {
-            //        for (int i = 0; i < 3; i++)
-            //        {
-            //            IAsyncResult asyncResult1 = tcpClient.BeginConnect(ipAddress, tcpPort, null, null);
-            //            asyncResult1.AsyncWaitHandle.WaitOne(1000, true); //wait for 3 sec
-            //        }
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    string error = "Electricity: ID = " + post.id + " " + post.IP + " date - "
-            //        + DateTime.Now.ToString() + " Ошибка подключения TCP";
-            //    // ":Connect process " + ex.StackTrace + "==>" + ex.Message
-            //    Console.WriteLine(error);
-            //    Log.logNode(error);
-            //    return;
-            //}
             for (int i = 0; i <= 2; i++)
             {
+                // программа время от времени не читает несколько значений электричества, если создавать
+                // новый  tcpClient при подключении, ошибки становятся минимальными. Я так не понял в чем дело
                 tcpClient = new TcpClient();
 
                 try
@@ -104,24 +77,26 @@ namespace ModBus
 
                     if (tcpClient.Connected)
                     {
+                        //успех
                         master = ModbusIpMaster.CreateIp(tcpClient);
                         master.Transport.Retries = 0; //don't have to do retries
                         master.Transport.ReadTimeout = 1500;
                         A1.Registers = master.ReadHoldingRegisters(1, 2801, 20);
-                        A1.ConvertValues();
+                        A1.ConvertValues(); // конвертация значений
                         
                         break;
                     }
                 }
                 catch
                 {
-
+                    //неудача
                     string error = "Electricity: ID = " + post.id + " " + post.IP + " date - "
                         + DateTime.Now.ToString() + " Ошибка подключения TCP";
-                    // ":Connect process " + ex.StackTrace + "==>" + ex.Message
+                    
                     Console.WriteLine(error);
                     if(post.id != 999)
                     {
+                        // 999 это тестовый IP 
                         Log.logNodeElictricityTestID(error);
                         Log.logNodeElictricity(error);
                        
@@ -136,7 +111,7 @@ namespace ModBus
                 }
                 if (i == 2)
                 {
-                    return;
+                    return; // если 3 итерации не помогло
                 }
                 tcpClient.Close();
                 tcpClient.Dispose();
@@ -146,12 +121,15 @@ namespace ModBus
             tcpClient.Close();
             tcpClient.Dispose();
 
-
+            /* Хитрая система во избежания перегрузки БД. Создаем новую коллекцию в базе данных каждый месяц
+             * первого числа. Иначе запрос к БД будет выполняться бесконечность.
+            */
             int month = DateTime.Now.Month;
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
             DateTime time = DateTime.Now;
 
+            // передаем значения классу записи
             mongoNode.ID = post.id;
             mongoNode.wP_in = A1.Values[0];
             mongoNode.WP_out = A1.Values[1];
@@ -166,6 +144,7 @@ namespace ModBus
 
             try
             {
+                // попытка подключения к ДБ
                 MongoClient client = new MongoClient("mongodb://localhost");
                 IMongoDatabase DB = client.GetDatabase("Electricity");
                 collection = DB.GetCollection<ElectricityMongoNode>(date );
@@ -181,8 +160,8 @@ namespace ModBus
             
             try
             {
-                 collection.InsertOne(mongoNode);
-                
+                // запись в БД
+                collection.InsertOne(mongoNode);  
             }
             catch (Exception e)
             {
