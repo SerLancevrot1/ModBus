@@ -44,6 +44,11 @@ namespace ModBus
 
                 Task.Factory.StartNew(() => SaveDocsWater(parametrs));
             }
+
+            ProductionLineWrite productionLine = new ProductionLineWrite();
+            Task.Factory.StartNew(() => productionLine.SaveDocsProductionLine(19, 20, 21, "Water"));
+
+            return;
         }
 
         public  void SaveDocsWater(Water_XmlDoc parametrs)

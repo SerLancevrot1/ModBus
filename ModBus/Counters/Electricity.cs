@@ -34,7 +34,7 @@ namespace ModBus
             XmlElement xRoot = xDoc.DocumentElement;
             XmlNodeList nodeList = xDoc.DocumentElement.SelectNodes("/counters/counter");
 
-            ProductionLineWrite productionLine = new ProductionLineWrite();
+            
 
             foreach (XmlNode xnode in nodeList)
             {
@@ -49,8 +49,14 @@ namespace ModBus
                 parametrs.comment = xnode.SelectSingleNode("comment").InnerText;
 
                 Task.Factory.StartNew(() => SaveDocsElectricity(parametrs));
-                Task.Factory.StartNew(() => productionLine.SaveDocsProductionLine());
+
+                
             }
+
+
+            ProductionLineWrite productionLine = new ProductionLineWrite();
+            Task.Factory.StartNew(() => productionLine.SaveDocsProductionLine(64, 65, 66, "Electricity"));
+
             return;
         }
 

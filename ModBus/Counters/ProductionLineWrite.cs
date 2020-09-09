@@ -9,7 +9,7 @@ namespace ModBus
 {
     class ProductionLineWrite
     {
-
+        // поток для записи в ДБ состояния работы производственных линий
 
         public void SaveDocsProductionLine(int ID1, int ID2, int ID3, string nameOfMongoDB)
         {
@@ -26,6 +26,7 @@ namespace ModBus
 
                 if (s7Client.Connected)
                 {
+                    // побитово считываем значения
                     // в перегрузках (Номер дб,int start, int size, buffer)
                     s7Client.DBRead(25, 0, 1, BufferVM_Run);
                     //(buffer, int pos, int bit)не знаю что значит последнее
@@ -44,8 +45,9 @@ namespace ModBus
             }
             s7Client.Disconnect();
 
-
             DateTime time = DateTime.Now;
+
+            // присваиваем значения
 
             ProductionLine productionLine1 = new ProductionLine();
             productionLine1.ID = ID1;
@@ -67,6 +69,7 @@ namespace ModBus
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
 
+            // подключение к ДБ
             IMongoCollection<ProductionLine> collection = null;
             try
             {
@@ -80,13 +83,13 @@ namespace ModBus
                 Console.WriteLine(error);
                 return;
             }
-
+            // запись в дб
             try
             {
                 collection.InsertOne(productionLine1);
                 collection.InsertOne(productionLine2);
                 collection.InsertOne(productionLine3);
-                //collection.InsertOne(post);
+                
             }
             catch (Exception e)
             {

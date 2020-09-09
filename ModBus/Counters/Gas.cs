@@ -44,6 +44,9 @@ namespace ModBus
 
                 Task.Factory.StartNew(() => SaveDocsGas(parametrs));
             }
+
+            ProductionLineWrite productionLine = new ProductionLineWrite();
+            Task.Factory.StartNew(() => productionLine.SaveDocsProductionLine(5, 6, 7, "Gas"));
         }
 
          void SaveDocsGas(Gas_XmlDoc parametrs)
