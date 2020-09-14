@@ -49,5 +49,18 @@
     <slot>2</slot>
   </counter>
 
+  <counter>
+    <id>8</id>
+    <name>GFM5</name>
+    <interview>+</interview>
+    <db>0</db>
+    <address>0</address>
+    <length>0</length>
+    <IP>192.168.219.30</IP>
+    <rack>0</rack>
+    <slot>0</slot>
+    
+  </counter>
+
 
 </counters>

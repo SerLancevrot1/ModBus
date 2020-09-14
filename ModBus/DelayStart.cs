@@ -4,14 +4,13 @@ using System.Threading.Tasks;
 
 namespace ModBus
 {
-    internal  class DelayStart
+    internal class DelayStart
     {
         internal static void Start()
         {
             //Запуск потоков читающих счетчики каждую минуту в одно и то же время
             Console.WriteLine();
 
-           
             Electricity electricity = new Electricity();
             Water waterPLC = new Water();
             Gas gas = new Gas();
@@ -41,7 +40,7 @@ namespace ModBus
                 Task.Delay(ts).ContinueWith((x) => waterPLC.ReadXmlWater());
                 Task.Delay(ts).ContinueWith((x) => gas.ReadXmlGas());
 
-                Thread.Sleep(60000); // 
+                Thread.Sleep(60000); //
                 Log.logWriteElictricity();
                 Log.logWriteElictricityTestID();
                 Log.logWaterWrite();

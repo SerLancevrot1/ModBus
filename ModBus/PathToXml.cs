@@ -3,11 +3,11 @@ using System.IO;
 
 namespace ModBus
 {
-    public  class PathXml
+    public class PathXml
     {
         // Пути к XML файлам
 
-        public  string ElectricityRelativePathToXml()
+        public string ElectricityRelativePathToXml()
         {
             string exeDir = AppDomain.CurrentDomain.BaseDirectory; // имя пользователя
             string relPath = @"..\netcoreapp3.1\XML\Electricity.xml"; // Относительный путь к файлу
@@ -16,7 +16,7 @@ namespace ModBus
             return resPath;
         }
 
-        public  string WaterRelativePathToXml()
+        public string WaterRelativePathToXml()
         {
             string exeDir = AppDomain.CurrentDomain.BaseDirectory;
             string relPath = @"..\netcoreapp3.1\XML\WaterPLC.xml"; // Относительный путь к файлу

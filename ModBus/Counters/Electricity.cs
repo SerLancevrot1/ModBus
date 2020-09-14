@@ -2,10 +2,7 @@
 using ModBus.Classes;
 using MongoDB.Driver;
 using System;
-using System.IO;
 using System.Net.Sockets;
-using System.Text;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -13,7 +10,7 @@ namespace ModBus
 {
     internal class Electricity
     {
-         public void ReadXmlElectricity()
+        public void ReadXmlElectricity()
         {
             // во всех классах счетчиков примерно одно и то же
             // Подгрузка пути
@@ -34,8 +31,6 @@ namespace ModBus
             XmlElement xRoot = xDoc.DocumentElement;
             XmlNodeList nodeList = xDoc.DocumentElement.SelectNodes("/counters/counter");
 
-            
-
             foreach (XmlNode xnode in nodeList)
             {
                 // запись настроек счетчика в экземляр класса parametrs
@@ -49,10 +44,7 @@ namespace ModBus
                 parametrs.comment = xnode.SelectSingleNode("comment").InnerText;
 
                 Task.Factory.StartNew(() => SaveDocsElectricity(parametrs));
-
-                
             }
-
 
             ProductionLineWrite productionLine = new ProductionLineWrite();
             Task.Factory.StartNew(() => productionLine.SaveDocsProductionLine(64, 65, 66, "Electricity"));
@@ -60,9 +52,8 @@ namespace ModBus
             return;
         }
 
-        public  void SaveDocsElectricity(ElectricityXmlDoc post)
+        public void SaveDocsElectricity(ElectricityXmlDoc post)
         {
-            
             ElectricityMongoNode mongoNode = new ElectricityMongoNode();
             ModbusIpMaster master = null;
             TcpClient tcpClient = null;
@@ -70,7 +61,7 @@ namespace ModBus
             string ipAddress = post.IP;
             int tcpPort = 502;
             PAC3200_Power A1 = new PAC3200_Power();
-           
+
             // попытка подключения
 
             for (int i = 0; i <= 2; i++)
@@ -91,7 +82,7 @@ namespace ModBus
                         master.Transport.ReadTimeout = 1500;
                         A1.Registers = master.ReadHoldingRegisters(1, 2801, 20);
                         A1.ConvertValues(); // конвертация значений
-                        
+
                         break;
                     }
                 }
@@ -100,22 +91,19 @@ namespace ModBus
                     //неудача
                     string error = "Electricity: ID = " + post.id + " " + post.IP + " date - "
                         + DateTime.Now.ToString() + " Ошибка подключения TCP";
-                    
+
                     Console.WriteLine(error);
-                    if(post.id != 999)
+                    if (post.id != 999)
                     {
-                        // 999 это тестовый IP 
+                        // 999 это тестовый IP
                         Log.logNodeElictricityTestID(error);
                         Log.logNodeElictricity(error);
-                       
                     }
                     else
                     {
                         Log.logNodeElictricity(error);
                         return;
                     }
-                    
-                  
                 }
                 if (i == 2)
                 {
@@ -123,7 +111,6 @@ namespace ModBus
                 }
                 tcpClient.Close();
                 tcpClient.Dispose();
-
             }
 
             tcpClient.Close();
@@ -146,8 +133,6 @@ namespace ModBus
             mongoNode.WQ = A1.Values[4];
             mongoNode.dateTime = time;
 
-
-
             IMongoCollection<ElectricityMongoNode> collection = null;
 
             try
@@ -155,9 +140,9 @@ namespace ModBus
                 // попытка подключения к ДБ
                 MongoClient client = new MongoClient("mongodb://localhost");
                 IMongoDatabase DB = client.GetDatabase("Electricity");
-                collection = DB.GetCollection<ElectricityMongoNode>(date );
+                collection = DB.GetCollection<ElectricityMongoNode>(date);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 string error = "Electricity: ID = " + post.id + " " + post.IP +
                     "Не удалось подключиться к базе данных " + e.Message;
@@ -165,11 +150,11 @@ namespace ModBus
                 Log.logNodeElictricity(error);
                 return;
             }
-            
+
             try
             {
                 // запись в БД
-                collection.InsertOne(mongoNode);  
+                collection.InsertOne(mongoNode);
             }
             catch (Exception e)
             {
@@ -181,13 +166,11 @@ namespace ModBus
                 Log.logNodeElictricity(error);
                 return;
             }
-            Console.WriteLine("Electricity: ID = " + post.id + " " + post.IP + " " + mongoNode.wP_in + 
-                " " + mongoNode.WP_out + " " +mongoNode.WQ_in + " " + mongoNode.WQ_oup + " " 
+            Console.WriteLine("Electricity: ID = " + post.id + " " + post.IP + " " + mongoNode.wP_in +
+                " " + mongoNode.WP_out + " " + mongoNode.WQ_in + " " + mongoNode.WQ_oup + " "
                 + mongoNode.WQ + "Запить произведена: " + time);
 
-
             return;
-
         }
     }
 }

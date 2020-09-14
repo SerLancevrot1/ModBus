@@ -2,15 +2,14 @@
 using MongoDB.Driver;
 using Sharp7;
 using System;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
 namespace ModBus
 {
-    class Water
+    internal class Water
     {
-         public void ReadXmlWater()
+        public void ReadXmlWater()
         {
             PathXml pathXml = new PathXml();
             string way = pathXml.WaterRelativePathToXml();
@@ -26,7 +25,6 @@ namespace ModBus
             }
             XmlElement xRoot = xDoc.DocumentElement;
             XmlNodeList nodeList = xDoc.DocumentElement.SelectNodes("/counters/counter");
-
 
             foreach (XmlNode xnode in nodeList)
             {
@@ -51,7 +49,7 @@ namespace ModBus
             return;
         }
 
-        public  void SaveDocsWater(Water_XmlDoc parametrs)
+        public void SaveDocsWater(Water_XmlDoc parametrs)
         {
             DateTime time = DateTime.Now;
             Water_MongoNode water_MongoNode = new Water_MongoNode();
@@ -59,9 +57,7 @@ namespace ModBus
             float value = 0;
             byte[] Buffer = new byte[parametrs.length];
 
-            
-
-            for(int i=0; i <=2; i++)
+            for (int i = 0; i <= 2; i++)
             {
                 s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
 
@@ -82,12 +78,9 @@ namespace ModBus
                 }
             }
 
-           
-            
             //Console.WriteLine(parametrs.id + "   " + parametrs.name + "    " + value.ToString() + "  " + time);
             s7Client.Disconnect();
-            
-            
+
             int month = DateTime.Now.Month;
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
@@ -117,7 +110,7 @@ namespace ModBus
 
             try
             {
-                 collection.InsertOne(water_MongoNode);
+                collection.InsertOne(water_MongoNode);
                 //collection.InsertOne(post);
             }
             catch (Exception e)

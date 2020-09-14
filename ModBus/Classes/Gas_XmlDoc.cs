@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace ModBus.Classes
+﻿namespace ModBus.Classes
 {
     internal class Gas_XmlDoc
     {

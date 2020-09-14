@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <counters>
 
-  
   <counter>
     <id>1</id>
     <name>FM01_SUM</name>

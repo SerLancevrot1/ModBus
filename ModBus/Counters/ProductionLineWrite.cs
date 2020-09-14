@@ -2,19 +2,15 @@
 using MongoDB.Driver;
 using Sharp7;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace ModBus
 {
-    class ProductionLineWrite
+    internal class ProductionLineWrite
     {
         // поток для записи в ДБ состояния работы производственных линий
 
         public void SaveDocsProductionLine(int ID1, int ID2, int ID3, string nameOfMongoDB)
         {
-
-          
             S7Client s7Client = new S7Client();
 
             bool isRun1 = false, isRun2 = false, isRun3 = false;
@@ -64,7 +60,6 @@ namespace ModBus
             productionLine3.dateTime = time;
             productionLine3.IsWork = isRun3;
 
-
             int month = DateTime.Now.Month;
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
@@ -79,7 +74,7 @@ namespace ModBus
             }
             catch (Exception e)
             {
-                string error = "ProductionLine: " + "Не удалось подключиться к базе данных "+ time+ e.Message;
+                string error = "ProductionLine: " + "Не удалось подключиться к базе данных " + time + e.Message;
                 Console.WriteLine(error);
                 return;
             }
@@ -89,7 +84,6 @@ namespace ModBus
                 collection.InsertOne(productionLine1);
                 collection.InsertOne(productionLine2);
                 collection.InsertOne(productionLine3);
-                
             }
             catch (Exception e)
             {
@@ -100,7 +94,7 @@ namespace ModBus
                 Console.ForegroundColor = ConsoleColor.White;
                 return;
             }
-            Console.WriteLine("ProductionLine: "+ productionLine1.ID + " " + productionLine1.IsWork.ToString() 
+            Console.WriteLine("ProductionLine: " + productionLine1.ID + " " + productionLine1.IsWork.ToString()
                 + " " + "Запить произведена: " + time);
             Console.WriteLine("ProductionLine: " + productionLine2.ID + " " + productionLine2.IsWork.ToString()
                  + " " + "Запить произведена: " + time);
