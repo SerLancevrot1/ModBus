@@ -7,6 +7,9 @@ namespace ModBus
     {
         public ushort[] Registers = new ushort[20];
         public float[] Values = new float[5];
+        public int intValue;
+
+
 
         public void ConvertValues()
         {
@@ -29,6 +32,27 @@ namespace ModBus
             x.CopyTo(z, 0);
             y.CopyTo(z, x.Length);
             return BitConverter.ToSingle(z, 0);
+        }
+
+        public int intConvertValue()
+        {
+            intValue = intCouterConvert(Registers[1], Registers[0]);
+
+            return 0;
+        }
+
+        private int intCouterConvert(ushort a, ushort b)
+        {
+            byte[] x = new byte[2];
+            byte[] y = new byte[2];
+            byte[] z = new byte[4];
+
+            x = BitConverter.GetBytes(a);
+            y = BitConverter.GetBytes(b);
+            z = new byte[x.Length + y.Length];
+            x.CopyTo(z, 0);
+            y.CopyTo(z, x.Length);
+            return BitConverter.ToInt32(z, 0);
         }
     }
 }

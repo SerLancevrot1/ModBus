@@ -13,6 +13,7 @@ namespace ModBus
     {
         public void ReadXmlGas()
         {
+            
             PathXml pathXml = new PathXml();
             string way = pathXml.GasRelativePathToXml();
             XmlDocument xDoc = new XmlDocument();
@@ -36,9 +37,11 @@ namespace ModBus
                 parametrs.interview = xnode.SelectSingleNode("interview").InnerText;
                 if (parametrs.interview == "-") { continue; }
                 parametrs.DB = Convert.ToInt32(xnode.SelectSingleNode("db").InnerText);
+                parametrs.AddressOfRemoteSlave = Convert.ToInt32(xnode.SelectSingleNode("AddressOfRemoteSlave").InnerText);
                 parametrs.address = Convert.ToInt32(xnode.SelectSingleNode("address").InnerText);
                 parametrs.length = Convert.ToInt32(xnode.SelectSingleNode("length").InnerText);
                 parametrs.IP = xnode.SelectSingleNode("IP").InnerText;
+                parametrs.port = Convert.ToInt32(xnode.SelectSingleNode("port").InnerText);
                 parametrs.rack = Convert.ToInt32(xnode.SelectSingleNode("rack").InnerText);
                 parametrs.slot = Convert.ToInt32(xnode.SelectSingleNode("slot").InnerText);
 
@@ -55,13 +58,13 @@ namespace ModBus
             Gas_MongoNode gas_MongoNode = new Gas_MongoNode();
 
             
-            if (parametrs.DB == 0)
+            if (parametrs.AddressOfRemoteSlave != 0)
             {
                 ModbusIpMaster master = null;
                 TcpClient tcpClient = null;
 
-                string ipAddress = parametrs.IP;
-                int tcpPort = 502;
+                
+                
                 PAC3200_Power A1 = new PAC3200_Power();
 
                 // попытка подключения
@@ -74,7 +77,7 @@ namespace ModBus
 
                     try
                     {
-                        tcpClient.Connect(ipAddress, tcpPort);
+                        tcpClient.Connect(parametrs.IP, parametrs.port);
 
                         if (tcpClient.Connected)
                         {
@@ -82,12 +85,14 @@ namespace ModBus
                             master = ModbusIpMaster.CreateIp(tcpClient);
                             master.Transport.Retries = 0; //don't have to do retries
                             master.Transport.ReadTimeout = 1500;
-                            A1.Registers = master.ReadHoldingRegisters(1, 2801, 20);
-                            A1.ConvertValues(); // конвертация значений
+                            A1.Registers = master.ReadHoldingRegisters((byte)parametrs.AddressOfRemoteSlave,
+                                (ushort)parametrs.address, (ushort)parametrs.length);
+                            Console.WriteLine("попытка конвертации");
+                            A1.intConvertValue(); // конвертация значений
 
                             gas_MongoNode.ID = parametrs.id;
                             gas_MongoNode.name = parametrs.name;
-                            gas_MongoNode.value = A1.Values[0];
+                            gas_MongoNode.value = A1.intValue;
                             gas_MongoNode.dateTime = time;
 
                             break;
@@ -99,8 +104,8 @@ namespace ModBus
                         tcpClient.Dispose();
 
                         //неудача
-                        string error = "Gas: ID = " + parametrs.id + " " + parametrs.IP + " date - "
-                            + DateTime.Now.ToString() + " Ошибка подключения TCP";
+                        string error = "GasTCP: ID = " + parametrs.id + " " + parametrs.IP + " date - "
+                            + DateTime.Now.ToString() + " Ошибка подключения TCP" ;
 
                         Console.WriteLine(error);
                         if (parametrs.id != 999)

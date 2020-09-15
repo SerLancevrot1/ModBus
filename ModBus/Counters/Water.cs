@@ -1,7 +1,9 @@
-﻿using ModBus.Classes;
+﻿using Modbus.Device;
+using ModBus.Classes;
 using MongoDB.Driver;
 using Sharp7;
 using System;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -37,6 +39,7 @@ namespace ModBus
                 parametrs.address = Convert.ToInt32(xnode.SelectSingleNode("address").InnerText);
                 parametrs.length = Convert.ToInt32(xnode.SelectSingleNode("length").InnerText);
                 parametrs.IP = xnode.SelectSingleNode("IP").InnerText;
+                parametrs.port = Convert.ToInt32(xnode.SelectSingleNode("port").InnerText);
                 parametrs.rack = Convert.ToInt32(xnode.SelectSingleNode("rack").InnerText);
                 parametrs.slot = Convert.ToInt32(xnode.SelectSingleNode("slot").InnerText);
 
@@ -53,42 +56,115 @@ namespace ModBus
         {
             DateTime time = DateTime.Now;
             Water_MongoNode water_MongoNode = new Water_MongoNode();
-            S7Client s7Client = new S7Client();
-            float value = 0;
-            byte[] Buffer = new byte[parametrs.length];
 
-            for (int i = 0; i <= 2; i++)
+            if (parametrs.AddressOfRemoteSlave != 0)
             {
-                s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
+                ModbusIpMaster master = null;
+                TcpClient tcpClient = null;
 
-                if (s7Client.Connected)
-                {
-                    s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
-                    value = S7.GetRealAt(Buffer, 0);
-                    break;
-                }
-                else
-                {
-                    string error = "Water: ID = " + parametrs.id + " " + parametrs.name + " " + time + " " +
-                        "не удалось подключиться к адресу " + parametrs.IP;
+                PAC3200_Power A1 = new PAC3200_Power();
 
-                    Console.WriteLine(error);
-                    Log.logWaterNode(error);
-                    return;
+                // попытка подключения
+
+                for (int i = 1; i <= 3; i++)
+                {
+                    // программа время от времени не читает несколько значений электричества, если создавать
+                    // новый  tcpClient при подключении, ошибки становятся минимальными. Я так не понял в чем дело
+                    tcpClient = new TcpClient();
+
+                    try
+                    {
+                        tcpClient.Connect(parametrs.IP, parametrs.port);
+
+                        if (tcpClient.Connected)
+                        {
+                            //успех
+                            master = ModbusIpMaster.CreateIp(tcpClient);
+                            master.Transport.Retries = 0; //don't have to do retries
+                            master.Transport.ReadTimeout = 1500;
+                            A1.Registers = master.ReadHoldingRegisters((byte)parametrs.AddressOfRemoteSlave,
+                                (ushort)parametrs.address, (ushort)parametrs.length);
+                            A1.intConvertValue(); // конвертация значений
+
+                            water_MongoNode.ID = parametrs.id;
+                            water_MongoNode.name = parametrs.name;
+                            water_MongoNode.value = A1.intValue;
+                            water_MongoNode.dateTime = time;
+
+                            break;
+                        }
+                    }
+                    catch
+                    {
+                        tcpClient.Close();
+                        tcpClient.Dispose();
+
+                        //неудача
+                        string error = "WaterTCP: ID = " + parametrs.id + " " + parametrs.IP + " date - "
+                            + DateTime.Now.ToString() + " Ошибка подключения TCP";
+
+                        Console.WriteLine(error);
+                        if (parametrs.id != 999)
+                        {
+                            // 999 это тестовый IP
+                            Log.logNodeElictricityTestID(error);
+                            Log.logNodeElictricity(error);
+                        }
+                    }
+                    if (i == 2)
+                    {
+                        return; // если 3 итерации не помогло
+                    }
+
                 }
+
+                tcpClient.Close();
+                tcpClient.Dispose();
+            }
+            else
+            {
+                S7Client s7Client = new S7Client();
+                float value = 0;
+                byte[] Buffer = new byte[parametrs.length];
+
+                for (int i = 0; i <= 2; i++)
+                {
+                    s7Client.ConnectTo(parametrs.IP, parametrs.rack, parametrs.slot);
+
+                    if (s7Client.Connected)
+                    {
+                        s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
+                        value = S7.GetRealAt(Buffer, 0);
+
+                        water_MongoNode.ID = parametrs.id;
+                        water_MongoNode.name = parametrs.name;
+                        water_MongoNode.value = value;
+                        water_MongoNode.dateTime = time;
+                        break;
+                    }
+                    else
+                    {
+                        string error = "Water: ID = " + parametrs.id + " " + parametrs.name + " " + time + " " +
+                            "не удалось подключиться к адресу " + parametrs.IP;
+
+                        Console.WriteLine(error);
+                        Log.logWaterNode(error);
+                        return;
+                    }
+                }
+
+                //Console.WriteLine(parametrs.id + "   " + parametrs.name + "    " + value.ToString() + "  " + time);
+                s7Client.Disconnect();
             }
 
-            //Console.WriteLine(parametrs.id + "   " + parametrs.name + "    " + value.ToString() + "  " + time);
-            s7Client.Disconnect();
+
+            
 
             int month = DateTime.Now.Month;
             int year = DateTime.Now.Year;
             string date = new DateTime(year, month, 1).ToShortDateString();
 
-            water_MongoNode.ID = parametrs.id;
-            water_MongoNode.name = parametrs.name;
-            water_MongoNode.value = value;
-            water_MongoNode.dateTime = time;
+            
 
             IMongoCollection<Water_MongoNode> collection = null;
             try
