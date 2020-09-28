@@ -57,6 +57,8 @@ namespace ModBus
             DateTime time = DateTime.Now;
             Water_MongoNode water_MongoNode = new Water_MongoNode();
 
+            //проверка на тип подключения, если AddressOfRemoteSlave = 0, подключение tcp, если нет, то через дб
+
             if (parametrs.AddressOfRemoteSlave != 0)
             {
                 ModbusIpMaster master = null;
@@ -86,6 +88,7 @@ namespace ModBus
                                 (ushort)parametrs.address, (ushort)parametrs.length);
                             A1.intConvertValue(); // конвертация значений
 
+                            //передача данных в экземпляр класса
                             water_MongoNode.ID = parametrs.id;
                             water_MongoNode.name = parametrs.name;
                             water_MongoNode.value = A1.intValue;
@@ -136,6 +139,7 @@ namespace ModBus
                         s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
                         value = S7.GetRealAt(Buffer, 0);
 
+                        //передача данных в экземпляр класса
                         water_MongoNode.ID = parametrs.id;
                         water_MongoNode.name = parametrs.name;
                         water_MongoNode.value = value;

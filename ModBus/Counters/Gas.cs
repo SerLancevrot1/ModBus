@@ -57,14 +57,13 @@ namespace ModBus
             DateTime time = DateTime.Now;
             Gas_MongoNode gas_MongoNode = new Gas_MongoNode();
 
+
+            //проверка на тип подключения, если AddressOfRemoteSlave = 0, подключение tcp, если нет, то через дб
             
             if (parametrs.AddressOfRemoteSlave != 0)
             {
                 ModbusIpMaster master = null;
                 TcpClient tcpClient = null;
-
-                
-                
                 PAC3200_Power A1 = new PAC3200_Power();
 
                 // попытка подключения
@@ -90,6 +89,7 @@ namespace ModBus
                             Console.WriteLine("попытка конвертации");
                             A1.intConvertValue(); // конвертация значений
 
+                            //передача данных в экземпляр класса
                             gas_MongoNode.ID = parametrs.id;
                             gas_MongoNode.name = parametrs.name;
                             gas_MongoNode.value = A1.intValue;
@@ -140,6 +140,7 @@ namespace ModBus
                         s7Client.DBRead(parametrs.DB, parametrs.address, parametrs.length, Buffer);
                         value = S7.GetRealAt(Buffer, 0);
 
+                        //передача данных в экземпляр класса
                         gas_MongoNode.ID = parametrs.id;
                         gas_MongoNode.name = parametrs.name;
                         gas_MongoNode.value = value;

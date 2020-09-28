@@ -54,6 +54,9 @@ namespace ModBus
 
         public void SaveDocsElectricity(ElectricityXmlDoc post)
         {
+
+            
+
             ElectricityMongoNode mongoNode = new ElectricityMongoNode();
             ModbusIpMaster master = null;
             TcpClient tcpClient = null;
