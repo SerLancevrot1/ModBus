@@ -14,7 +14,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="MongoDB.Driver" Version="2.10.2" />
+    <PackageReference Include="MongoDB.Driver" Version="2.19.0" />
     <PackageReference Include="NModbus4" Version="3.0.0-alpha2" />
     <PackageReference Include="Sharp7" Version="1.1.63" />
     <PackageReference Include="System.IO.Ports" Version="4.7.0" />
